@@ -37,7 +37,7 @@ public class ClienteBO {
         dao.remove(cliente);
     }
 
-    public void inativar(Cliente cliente) throws Exception {
+    public void inativar(@org.jetbrains.annotations.NotNull Cliente cliente) throws Exception {
         cliente.setAtivo(false);
         atualiza(cliente);
     }
