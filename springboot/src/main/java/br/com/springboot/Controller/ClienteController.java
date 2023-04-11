@@ -1,4 +1,4 @@
-package Controller;
+package br.com.springboot.Controller;
 
 import br.com.springboot.bo.ClienteBO;
 import br.com.springboot.model.Cliente;
