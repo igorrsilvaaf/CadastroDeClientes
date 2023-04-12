@@ -8,6 +8,7 @@ public interface CRUD<T, ID> { // T = template
     T PesquisaId(ID id);
     List<Cliente> list();
     void insere(T t) throws Exception;
+    void salvar(Object cliente) throws Exception;
     void atualiza(T t) throws Exception;
     void remove(T t) throws Exception;
 }

@@ -2,8 +2,10 @@ package br.com.springboot.dao;
 
 import br.com.springboot.model.Cliente;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,14 +23,25 @@ public class ClienteDAO implements CRUD<Object, Long> {
 
     @Override
     public List<Cliente> list() {
-        Query query = entityManager.createQuery("SELECT c FROM Cliente c", Cliente.class);
-        return query.getResultList();
+        //Query query = entityManager.createQuery("SELECT c FROM Cliente c", Cliente.class);
+        TypedQuery<Cliente> query = entityManager.createQuery("SELECT C FROM C", Cliente.class);
+        try{
+            return query.getResultList();
+        }catch(NoResultException e){
+            return null;
+        }
     }
 
 
     @Override
     public void insere(Object cliente) throws Exception {
         entityManager.persist(cliente);
+    }
+
+    
+    @Override
+    public void salvar(Object cliente) throws Exception{
+        ((ClienteDAO) entityManager).salvar(cliente);
     }
 
     @Override

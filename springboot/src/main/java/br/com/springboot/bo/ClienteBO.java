@@ -29,6 +29,10 @@ public class ClienteBO {
         dao.insere(cliente);
     }
 
+    public void salvar(Cliente cliente) throws Exception {
+        dao.salvar(cliente);
+    }
+
     public void atualiza(Cliente cliente) throws Exception {
         dao.atualiza(cliente);
     }
