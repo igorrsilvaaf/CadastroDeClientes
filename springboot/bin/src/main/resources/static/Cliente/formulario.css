@@ -1,0 +1,16 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-color: lavenderblush;
+}
+
+form{
+    align-items: center;
+    text-align: center;
+    font-family: Consolas, serif;
+}
+
+input{
+    align-items: center;
+    text-align: center;
+}

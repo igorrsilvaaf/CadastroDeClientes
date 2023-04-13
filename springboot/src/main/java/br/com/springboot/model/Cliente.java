@@ -109,7 +109,7 @@ public class Cliente {
     }
 
     public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
+        this.ativo = true;
     }
 
 }
