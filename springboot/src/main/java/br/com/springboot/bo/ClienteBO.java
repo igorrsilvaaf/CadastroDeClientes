@@ -2,20 +2,22 @@ package br.com.springboot.bo;
 
 import br.com.springboot.dao.ClienteDAO;
 import br.com.springboot.model.Cliente;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
+
 
 @Service
 public class ClienteBO {
 
     private final ClienteDAO dao;
 
-    @Autowired
     public ClienteBO(ClienteDAO dao) {
         this.dao = dao;
     }
+
 
     public Cliente PesquisaId(Long id) {
         return (Cliente) dao.PesquisaId(id);
@@ -41,17 +43,19 @@ public class ClienteBO {
         dao.remove(cliente);
     }
 
+
     public void inativar(@org.jetbrains.annotations.NotNull Cliente cliente) throws Exception {
         cliente.setAtivo(false);
         atualiza(cliente);
     }
 
-    public void ativar(Cliente cliente) throws Exception {
-        cliente.setAtivo(true);
-        atualiza(cliente);
+    public List<Cliente> listaTodos() {
+        List<Object> clientes = Collections.singletonList(dao.listaTodos());
+        List<Cliente> clientesConvertidos = new ArrayList<>();
+        for (Object cliente : clientes) {
+            clientesConvertidos.add((Cliente) cliente);
+        }
+        return clientesConvertidos;
     }
 
-    public Object listaTodos() {
-        return null;
-    }
 }

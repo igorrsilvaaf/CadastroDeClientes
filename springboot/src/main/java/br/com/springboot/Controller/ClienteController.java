@@ -3,8 +3,6 @@ package br.com.springboot.Controller;
 import br.com.springboot.bo.ClienteBO;
 import br.com.springboot.model.Cliente;
 
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,8 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ClienteController {
 
-    @Autowired
-    private ClienteBO bo;
+    private final ClienteBO bo;
+
+    public ClienteController(ClienteBO bo) {
+        this.bo = bo;
+    }
 
     @RequestMapping("/clientes/novo")
     public String novo(Model model) {
@@ -29,18 +30,6 @@ public class ClienteController {
         return new ModelAndView("redirect:/clientes/novo");
     }
 
-    @ControllerAdvice
-    public static class ErrorHandler {
-        @ExceptionHandler(value = { Exception.class })
-        @ResponseBody
-        public ModelAndView defaultErrorHandler(HttpServletRequest request, Exception e) throws Exception {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("Cliente/Error");
-            mav.addObject("exception", e);
-            mav.addObject("url", request.getRequestURL());
-            return mav;
-        }
-    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView lista(ModelMap model) {
