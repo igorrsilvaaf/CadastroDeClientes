@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,7 +17,7 @@ public class ClienteController {
     @Autowired
     private ClienteBO bo;
 
-    @GetMapping("/clientes/novo")
+    @RequestMapping("/clientes/novo")
     public String novo(Model model) {
         model.addAttribute("cliente", new Cliente());
         return "Cliente/formulario";
@@ -39,5 +40,11 @@ public class ClienteController {
             mav.addObject("url", request.getRequestURL());
             return mav;
         }
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ModelAndView lista(ModelMap model) {
+        model.addAttribute("clientes", bo.listaTodos());
+        return new ModelAndView("/Cliente/Lista", model);
     }
 }

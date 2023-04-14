@@ -50,4 +50,8 @@ public class ClienteBO {
         cliente.setAtivo(true);
         atualiza(cliente);
     }
+
+    public Object listaTodos() {
+        return null;
+    }
 }
