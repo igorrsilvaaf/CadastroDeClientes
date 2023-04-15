@@ -44,13 +44,29 @@ public class ClienteBO {
     }
 
 
+<<<<<<< HEAD
     public void inativa(@org.jetbrains.annotations.NotNull Cliente cliente) throws Exception {
+=======
+    public void inativar(@org.jetbrains.annotations.NotNull Cliente cliente) throws Exception {
+>>>>>>> 2aadf07ec80bd4787b324b91652fa3950ae925d3
         cliente.setAtivo(false);
         atualiza(cliente);
     }
 
+<<<<<<< HEAD
     public void ativa(Cliente cliente) throws Exception {
         cliente.setAtivo(true);
         dao.atualiza(cliente);
     }
+=======
+    public List<Cliente> listaTodos() {
+        List<Object> clientes = Collections.singletonList(dao.listaTodos());
+        List<Cliente> clientesConvertidos = new ArrayList<>();
+        for (Object cliente : clientes) {
+            clientesConvertidos.add((Cliente) cliente);
+        }
+        return clientesConvertidos;
+    }
+
+>>>>>>> 2aadf07ec80bd4787b324b91652fa3950ae925d3
 }

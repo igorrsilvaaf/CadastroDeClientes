@@ -28,7 +28,11 @@
 
     <tr th:each="cliente : ${clientes}">
       <td th:text="${cliente.nome}"></td>
+<<<<<<< HEAD:springboot/src/main/resources/templates/cliente/lista.html
       <td th:text="${#temporals.format(cliente.dataDeNascimento, 'dd/MM/yyyy')}"></td>
+=======
+      <td th:text="${#temporals.format(cliente.DataDeNascimento, 'dd/MM/yyyy')}"></td>
+>>>>>>> 2aadf07ec80bd4787b324b91652fa3950ae925d3:springboot/src/main/resources/templates/Cliente/Lista.html
       <td th:text="${cliente.cpf}"></td>
       <td>
         <a class="btn btn-sm btn-secondary" th:href="@{/clientes/edita/{id}(id=${cliente.id})}">Editar</a>
