@@ -2,10 +2,6 @@ package br.com.springboot.Controller;
 
 import br.com.springboot.bo.ClienteBO;
 import br.com.springboot.model.Cliente;
-<<<<<<< HEAD
-=======
-
->>>>>>> 2aadf07ec80bd4787b324b91652fa3950ae925d3
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,15 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-<<<<<<< HEAD
     private final ClienteBO clienteBO;
-=======
-    private final ClienteBO bo;
-
-    public ClienteController(ClienteBO bo) {
-        this.bo = bo;
-    }
->>>>>>> 2aadf07ec80bd4787b324b91652fa3950ae925d3
 
     public ClienteController(ClienteBO clienteBO) {
         this.clienteBO = clienteBO;
@@ -40,21 +28,12 @@ public class ClienteController {
         return new ModelAndView("cliente/formulario", model);
     }
 
-<<<<<<< HEAD
     //Salva o formulario no banco de dados
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String salva(@ModelAttribute Cliente cliente) throws Exception {
         clienteBO.insere(cliente);
         return "/cliente/fomulario";
     }
-=======
-    @PostMapping("/clientes/salvar")
-    public ModelAndView salva(@ModelAttribute Cliente cliente) throws Exception {
-        bo.insere(cliente);
-        return new ModelAndView("redirect:/clientes/novo");
-    }
-
->>>>>>> 2aadf07ec80bd4787b324b91652fa3950ae925d3
 
     //Lista os cadastros salvos em nosso banco
     @RequestMapping(value = "", method = RequestMethod.GET)
