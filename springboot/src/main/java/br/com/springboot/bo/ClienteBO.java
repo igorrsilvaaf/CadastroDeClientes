@@ -12,10 +12,10 @@ import java.util.ArrayList;
 @Service
 public class ClienteBO {
 
-    private final ClienteDAO dao;
+    private static ClienteDAO dao;
 
     public ClienteBO(ClienteDAO dao) {
-        this.dao = dao;
+        ClienteBO.dao = dao;
     }
 
 
@@ -23,8 +23,8 @@ public class ClienteBO {
         return (Cliente) dao.PesquisaId(id);
     }
 
-    public List<Cliente> list() {
-        return dao.list();
+    public static List<Cliente> listaTodos() {
+        return dao.listaTodos();
     }
 
     public void insere(Cliente cliente) throws Exception {
@@ -44,18 +44,13 @@ public class ClienteBO {
     }
 
 
-    public void inativar(@org.jetbrains.annotations.NotNull Cliente cliente) throws Exception {
+    public void inativa(@org.jetbrains.annotations.NotNull Cliente cliente) throws Exception {
         cliente.setAtivo(false);
         atualiza(cliente);
     }
 
-    public List<Cliente> listaTodos() {
-        List<Object> clientes = Collections.singletonList(dao.listaTodos());
-        List<Cliente> clientesConvertidos = new ArrayList<>();
-        for (Object cliente : clientes) {
-            clientesConvertidos.add((Cliente) cliente);
-        }
-        return clientesConvertidos;
+    public void ativa(Cliente cliente) throws Exception {
+        cliente.setAtivo(true);
+        dao.atualiza(cliente);
     }
-
 }

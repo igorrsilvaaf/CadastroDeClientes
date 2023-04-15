@@ -28,7 +28,7 @@
 
     <tr th:each="cliente : ${clientes}">
       <td th:text="${cliente.nome}"></td>
-      <td th:text="${#temporals.format(cliente.DataDeNascimento, 'dd/MM/yyyy')}"></td>
+      <td th:text="${#temporals.format(cliente.dataDeNascimento, 'dd/MM/yyyy')}"></td>
       <td th:text="${cliente.cpf}"></td>
       <td>
         <a class="btn btn-sm btn-secondary" th:href="@{/clientes/edita/{id}(id=${cliente.id})}">Editar</a>
