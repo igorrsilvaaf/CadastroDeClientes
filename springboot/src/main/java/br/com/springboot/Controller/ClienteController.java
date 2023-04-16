@@ -2,6 +2,7 @@ package br.com.springboot.Controller;
 
 import br.com.springboot.bo.ClienteBO;
 import br.com.springboot.model.Cliente;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,7 +33,7 @@ public class ClienteController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String salva(@ModelAttribute Cliente cliente) throws Exception {
         clienteBO.insere(cliente);
-        return "/cliente/fomulario";
+        return "/cliente/formulario";
     }
 
     //Lista os cadastros salvos em nosso banco

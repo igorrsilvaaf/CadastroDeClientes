@@ -4,9 +4,7 @@ import br.com.springboot.dao.ClienteDAO;
 import br.com.springboot.model.Cliente;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 
 
 @Service
@@ -20,7 +18,7 @@ public class ClienteBO {
 
 
     public Cliente PesquisaId(Long id) {
-        return (Cliente) dao.PesquisaId(id);
+        return dao.PesquisaId(id);
     }
 
     public static List<Cliente> listaTodos() {
@@ -31,9 +29,6 @@ public class ClienteBO {
         dao.insere(cliente);
     }
 
-    public void salvar(Cliente cliente) throws Exception {
-        dao.salvar(cliente);
-    }
 
     public void atualiza(Cliente cliente) throws Exception {
         dao.atualiza(cliente);
