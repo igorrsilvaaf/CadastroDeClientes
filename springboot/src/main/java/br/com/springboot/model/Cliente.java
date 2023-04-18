@@ -1,8 +1,14 @@
 package br.com.springboot.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
+
+import static jakarta.persistence.EnumType.STRING;
 
 
 @Entity // A anotação @Entity indica que essa classe é uma entidade JPA e pode ser persistida no banco de dados
@@ -15,25 +21,32 @@ public class Cliente {
     private Long id;
 
     @Column(nullable = false, length = 50) // Define o nome da coluna no banco de dados, a obrigatoriedade e o tamanho máximo do campo
+    @NotBlank(message = "Informe seu nome completo")
+    @Size(min = 10, max = 100)
     private String nome; //Atributo que representa o nome do cliente.
 
     @Column(length = 11) // Define o tamanho máximo do campo
+    @CPF(message = "Informe um CPF válido")
     private String cpf;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // Define o formato de data esperado para o campo.
     @Column(name = "data_nascimento", columnDefinition = "DATE") // Define o nome da coluna no banco de dados e o tipo de dados
+    @NotNull(message = "Obrigatório o preenchimento da data de nascimento")
     private LocalDate DataDeNascimento;
 
-    @Enumerated(EnumType.STRING) // Define que o atributo é um enum e deve ser persistido como uma string.
+    @Enumerated(STRING) // Define que o atributo é um enum e deve ser persistido como uma string.
+    @NotNull(message = "Obrigatório o preenchimento do campo SEXO")
     private Sexo sexo;
 
     @Column(length = 10)
     private String telefone;
 
     @Column(length = 11)
+    @NotNull(message = "Obrigatório o preenchimento do celular")
     private String celular;
 
     @Column(length = 50)
+    @jakarta.validation.constraints.Email
     private String Email;
 
 

@@ -8,7 +8,7 @@ public enum Sexo {
     FEMININO("F"); // Feminino
 
     // Atributo que armazena a descrição correspondente a cada valor
-    private String descricao;
+    private final String descricao;
 
     // Construtor do enum que recebe a descrição correspondente a cada valor
     Sexo(String descricao){
