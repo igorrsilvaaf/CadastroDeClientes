@@ -8,8 +8,6 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
-import static jakarta.persistence.EnumType.STRING;
-
 
 @Entity // A anotação @Entity indica que essa classe é uma entidade JPA e pode ser persistida no banco de dados
 @Table(name="clientes") // Define o nome da tabela que sera criada para essa entidade no BD
@@ -25,23 +23,22 @@ public class Cliente {
     @Size(min = 10, max = 100)
     private String nome; //Atributo que representa o nome do cliente.
 
-    @Column(length = 11) // Define o tamanho máximo do campo
+    @Column(length = 20) // Define o tamanho máximo do campo
     @CPF(message = "Informe um CPF válido")
     private String cpf;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // Define o formato de data esperado para o campo.
     @Column(name = "data_nascimento", columnDefinition = "DATE") // Define o nome da coluna no banco de dados e o tipo de dados
-    @NotNull(message = "Obrigatório o preenchimento da data de nascimento")
     private LocalDate DataDeNascimento;
 
-    @Enumerated(STRING) // Define que o atributo é um enum e deve ser persistido como uma string.
+    @Enumerated(EnumType.STRING) // Define que o atributo é um enum e deve ser persistido como uma string.
     @NotNull(message = "Obrigatório o preenchimento do campo SEXO")
     private Sexo sexo;
 
-    @Column(length = 10)
+    @Column(length = 15)
     private String telefone;
 
-    @Column(length = 11)
+    @Column(length = 15)
     @NotNull(message = "Obrigatório o preenchimento do celular")
     private String celular;
 
@@ -52,6 +49,9 @@ public class Cliente {
 
     private boolean ativo; // Atributo que indica se o cliente está ativo ou não
 
+    public Cliente(){
+        this.ativo = true;
+    }
     // Getters e Setters para os atributos da classe
     public Long getId() {
         return id;
@@ -89,8 +89,8 @@ public class Cliente {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = Sexo.valueOf(sexo);
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
     }
 
     public String getTelefone() {
@@ -122,7 +122,7 @@ public class Cliente {
     }
 
     public void setAtivo(boolean ativo) {
-        this.ativo = true;
+        this.ativo = ativo;
     }
 
 }

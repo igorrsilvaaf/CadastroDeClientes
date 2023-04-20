@@ -12,6 +12,8 @@ import  br.com.springboot.dao.ClienteDAO;
 
 import java.time.LocalDate;
 
+import static br.com.springboot.model.Sexo.MASCULINO;
+
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ClienteBOTest {
@@ -26,7 +28,8 @@ public class ClienteBOTest {
         cliente.setNome("Igor da silva");
         cliente.setCpf("10287794962");
         cliente.setDataDeNascimento(LocalDate.of(1995, 12, 16));
-        cliente.setSexo(String.valueOf(Sexo.MASCULINO));
+        Sexo masculino = MASCULINO;
+        cliente.setSexo((MASCULINO));
         cliente.setCelular("48991781573");
         cliente.setTelefone("0123456789");
         cliente.setEmail("teste@teste.com");

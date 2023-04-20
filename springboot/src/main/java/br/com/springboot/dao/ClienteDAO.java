@@ -20,7 +20,7 @@ public class ClienteDAO implements CRUD<Cliente, Long> {
     }
 
     public List<Cliente> listaTodos(){
-        TypedQuery<Cliente> query = entityManager.createQuery("SELECT c FROM clientes c", Cliente.class);
+        TypedQuery<Cliente> query = entityManager.createQuery("SELECT c FROM Cliente c", Cliente.class);
         try{
             return query.getResultList();
         }catch(NoResultException e){

@@ -4,6 +4,7 @@ import br.com.springboot.bo.ClienteBO;
 import br.com.springboot.model.Cliente;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,33 +15,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.naming.Binding;
 
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    private final ClienteBO clienteBO;
-
-    public ClienteController(ClienteBO clienteBO) {
-        this.clienteBO = clienteBO;
-    }
+    @Autowired
+    private  ClienteBO clienteBO;
 
     //Novo registro
     @RequestMapping(value = "/novo", method = RequestMethod.GET)
     public ModelAndView novo(ModelMap model) {
         model.addAttribute("cliente", new Cliente());
-        return new ModelAndView("cliente/formulario", model);
+        return new ModelAndView("/cliente/formulario", model);
     }
 
     //Salva o formulario no banco de dados
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String salva(@Valid @ModelAttribute Cliente cliente, BindingResult result) throws Exception {
-        if (result.hasErrors()){
-            return "cliente/formulario";
+    public String salva(@Valid @ModelAttribute Cliente cliente, BindingResult result, RedirectAttributes attr) throws Exception {
+        if (result.hasErrors())
+            return "/cliente/formulario";
+        if(cliente.getId() == null){
+            clienteBO.insere(cliente);
+            attr.addFlashAttribute("feedback", "Cliente foi cadastrado com sucesso");
+        }else{
+            clienteBO.atualiza(cliente);
+            attr.addFlashAttribute("feedback", "Cliente foi atualizado com sucesso");
         }
-        clienteBO.insere(cliente);
-        return "/cliente/formulario";
+        return "redirect:/clientes";
     }
 
     //Lista os cadastros salvos em nosso banco
@@ -68,6 +70,7 @@ public class ClienteController {
         try{
             Cliente cliente = clienteBO.PesquisaId(id);
             clienteBO.inativa(cliente);
+            attr.addFlashAttribute("feedback", "Cliente inativado com sucesso");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,6 +83,7 @@ public class ClienteController {
         try{
             Cliente cliente = clienteBO.PesquisaId(id);
             clienteBO.ativa(cliente);
+            attr.addFlashAttribute("feedback", "Cliente ativado com sucesso");
         }catch (Exception e){
             e.printStackTrace();
         }

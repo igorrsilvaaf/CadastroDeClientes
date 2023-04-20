@@ -1,11 +1,11 @@
 package br.com.springboot.model;
 
-// Definição do enum Sexo
 public enum Sexo {
 
     // Valores possíveis do enum
-    MASCULINO("M"), // Masculino
-    FEMININO("F"); // Feminino
+    MASCULINO("M"),
+    FEMININO("F"),
+    INDEFINIDO("I");
 
     // Atributo que armazena a descrição correspondente a cada valor
     private final String descricao;
